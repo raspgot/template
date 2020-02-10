@@ -1,0 +1,19 @@
+{
+    "name": "gauthier/template",
+    "description": "Basic portfolio template",
+    "type": "project",
+    "require": {
+        "google/recaptcha": "^1.2",
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.0",
+        "filp/whoops": "^2.7"
+    },
+    "authors": [
+        {
+            "name": "gauthier witkowski",
+            "email": "contact@raspgot.fr"
+        }
+    ]
+}

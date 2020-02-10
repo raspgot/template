@@ -7,7 +7,8 @@
     <title><?=$meta_title?></title>
     <meta name="description" content="<?=$meta_desc?>">
     <!--<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
 </head>
 
 <body>
@@ -36,9 +37,15 @@
         <?=$pageContent?>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+    </footer>
+
+    <script src="assets/js//jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
 
 </body>
 

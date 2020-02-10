@@ -1,5 +1,12 @@
 <?php
-    include '../config.php';
+    require '../vendor/autoload.php';
+    require '../config.php';
+
+    if ($_SERVER['SERVER_NAME'] === 'localhost') {
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
+    }
 
     ob_start();
 
@@ -10,6 +17,7 @@
             break;
 
         case '/contact':
+            // require '../src/Form.php';
             $res = Text::getByLink((string)REQUEST_URI);
             require VIEWS_PATH . 'pages/contact.php';
             break;
