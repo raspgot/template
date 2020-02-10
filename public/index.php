@@ -1,27 +1,21 @@
 <?php
     include '../config.php';
 
-    function returnRes()
-    {
-        $res[] = Text::getByLink((string)REQUEST_URI);
-        echo"<pre>"; print_r($res); echo"</pre>";
-    }
-
     ob_start();
 
     switch (REQUEST_URI) {
         case '/':
-            returnRes();
+            $res = Text::getByLink((string)REQUEST_URI);
             require VIEWS_PATH . 'pages/home.php';
             break;
 
         case '/contact':
-            returnRes();
+            $res = Text::getByLink((string)REQUEST_URI);
             require VIEWS_PATH . 'pages/contact.php';
             break;
 
         case '/photos':
-            returnRes();
+            $res = Text::getByLink((string)REQUEST_URI);
             require VIEWS_PATH . 'pages/photos.php';
             break;
 

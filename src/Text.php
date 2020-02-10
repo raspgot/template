@@ -9,7 +9,6 @@
 
         public static function getByLink(string $link): array
         {
-            $data = [];
             $pdo = Connection::getPDO();
             try {
                 $sth = $pdo->prepare("SELECT title, content FROM contents WHERE link = :link");
