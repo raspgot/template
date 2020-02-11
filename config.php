@@ -4,4 +4,6 @@
     
     define("SITE_NAME", "Peintre");
     define("VIEWS_PATH", "../views/");
-    define("REQUEST_URI", $_SERVER['REQUEST_URI']);
+    
+    if ($_SERVER['SERVER_NAME'] === 'localhost') define("ENV", 'dev');
+    else define("ENV", 'prd');

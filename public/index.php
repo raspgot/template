@@ -4,45 +4,54 @@
     require '../config.php';
 
     use App\Text;
+    use App\Router;
+    use App\Form;
 
-    if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    if (ENV === 'dev') {
         $whoops = new \Whoops\Run;
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
         $whoops->register();
     }
     
     ob_start();
+
+    Router::add('/', function() {
+        $res = Text::getByLink('/');
+        require VIEWS_PATH . 'pages/home.php';
+    });
     
-    switch (REQUEST_URI) {
-        case '/':
-            $res = Text::getByLink((string)REQUEST_URI);
-            require VIEWS_PATH . 'pages/home.php';
-            break;
+    Router::add('/contact', function() {
+        $res = Text::getByLink('/contact');
+        require VIEWS_PATH . 'pages/contact.php';
+    });
 
-        case '/contact':
-            $res = Text::getByLink((string)REQUEST_URI);
-            require VIEWS_PATH . 'pages/contact.php';
-            break;
+    // Post route example
+    Router::add('/contact-form', function() {
+        new Form($_POST);
+    }, 'post');
 
-        case '/contact?submitted':
-            if (!empty($_POST)) {
-                dump($_POST);
-            }
-            $res = Text::getByLink((string)REQUEST_URI);
-            require VIEWS_PATH . 'pages/contact.php';
-            break;
+    Router::add('/photos', function() {
+        $res = Text::getByLink('/photos');
+        require VIEWS_PATH . 'pages/photos.php';
+    });
 
-        case '/photos':
-            $res = Text::getByLink((string)REQUEST_URI);
-            require VIEWS_PATH . 'pages/photos.php';
-            break;
+    Router::add('/admin', function() {
+        $res = Text::getAll();
+        require VIEWS_PATH . 'pages/admin.php';
+    });
 
-        default:
-            require VIEWS_PATH . '404.php';
-            http_response_code(404);
-            break;
-    }
-
+    Router::pathNotFound(function($path) {
+        require VIEWS_PATH . '404.php';
+        http_response_code(404);
+    });
+    
+    Router::methodNotAllowed(function($path, $method) {
+        require VIEWS_PATH . '405.php';
+        http_response_code(405);
+    });
+    
+    Router::run('/');
+    
     $pageContent = ob_get_clean();
     require VIEWS_PATH . 'layout.php';
 ?>

@@ -2,14 +2,11 @@
     $meta_title = 'Contact | ' . SITE_NAME;
     $meta_desc  = 'Notre page de contact';
     $canonical  = 'contact';
-    
-    dump($res);
 ?>
 
 <div class="jumbotron mt-4">
     <h1 class="display-4">Contact</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-        featured content or information.</p>
+    <p class="lead"><?= $res['jumbotron_head'] ?></p>
 </div>
 
 <div class="row">
@@ -21,7 +18,7 @@
         </ul>
     </div>
     <div class="col-md-8">
-        <form action="?submitted" method="post">
+        <form action="contact-form" method="post">
             <!-- Statut -->
             <div class="alert p-0" id="status" role="alert"></div>
             <!-- Form -->

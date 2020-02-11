@@ -1,7 +1,7 @@
 $(function () {
     $('nav .collapse ul li a[href="' + location.pathname + '"]').parent().addClass('active');
 });
-/*
+
 if (location.pathname === '/contact') {
     const publicKey = "6Lcll9UUAAAAAMu_zAeRu-rKMILBAU16TwDSUSW0";
 
@@ -19,7 +19,7 @@ if (location.pathname === '/contact') {
             btn_val.prop("disabled", true);
             btn_val.html("<i class='fa fa-circle-o-notch fa-spin'></i>")
 
-            $.post('src/Form.php', form.serialize() + "&token=" + token)
+            $.post(form.attr("action"), form.serialize() + "&token=" + token)
 
                 .done(function (response) {
                     response = JSON.parse(response);
@@ -34,6 +34,7 @@ if (location.pathname === '/contact') {
                     } else {
                         set_alert(response);
                     }
+                    
                 })
 
                 .fail(function (response) {
@@ -61,7 +62,9 @@ if (location.pathname === '/contact') {
                 break;
         }
         status.html(response.response).addClass(type);
-        hideOnFocus(status);
+        setTimeout(function() {
+            status.html("").removeClass(type);
+        }, 5000);
     }
 
     // Get token from API
@@ -74,12 +77,4 @@ if (location.pathname === '/contact') {
             });
         });
     }
-
-    // Hide alert on focus fields
-    function hideOnFocus(param) {
-        $("input, textarea").focus(function () {
-            param.fadeOut();
-        });
-    }
 }
-*/

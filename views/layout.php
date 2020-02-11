@@ -34,13 +34,13 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mb-4">
         <?=$pageContent?>
     </div>
 
-    <footer class="footer">
+    <footer class="bg-light">
         <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+            <a href="/admin">Administration</a>
         </div>
     </footer>
 

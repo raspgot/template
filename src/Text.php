@@ -11,7 +11,6 @@
          * 
          * @param string The current link
          */
-
         public static function getByLink(string $link): array
         {
             $pdo = Connection::getPDO();
@@ -22,6 +21,24 @@
                 while ($row = $sth->fetch()) {
                     $data[$row['title']] = $row['content'];
                 }
+                $pdo = null;
+                return $data;
+            }
+            catch (PDOException $e) {
+                print $e->getMessage();
+            }
+        }
+        
+        /**
+         * Returns all the name and the content's <div>
+         */
+        public static function getAll(): array
+        {
+            $pdo = Connection::getPDO();
+            try {
+                $data = $pdo
+                    ->query("SELECT title, content FROM contents")
+                    ->fetchAll();
                 $pdo = null;
                 return $data;
             }
