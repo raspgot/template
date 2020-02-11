@@ -1,15 +1,18 @@
 <?php
+
     require '../vendor/autoload.php';
     require '../config.php';
+
+    use App\Text;
 
     if ($_SERVER['SERVER_NAME'] === 'localhost') {
         $whoops = new \Whoops\Run;
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
         $whoops->register();
     }
-
+    
     ob_start();
-
+    
     switch (REQUEST_URI) {
         case '/':
             $res = Text::getByLink((string)REQUEST_URI);
@@ -17,7 +20,14 @@
             break;
 
         case '/contact':
-            // require '../src/Form.php';
+            $res = Text::getByLink((string)REQUEST_URI);
+            require VIEWS_PATH . 'pages/contact.php';
+            break;
+
+        case '/contact?submitted':
+            if (!empty($_POST)) {
+                dump($_POST);
+            }
             $res = Text::getByLink((string)REQUEST_URI);
             require VIEWS_PATH . 'pages/contact.php';
             break;

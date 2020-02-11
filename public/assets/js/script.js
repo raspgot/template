@@ -1,7 +1,7 @@
 $(function () {
     $('nav .collapse ul li a[href="' + location.pathname + '"]').parent().addClass('active');
 });
-
+/*
 if (location.pathname === '/contact') {
     const publicKey = "6Lcll9UUAAAAAMu_zAeRu-rKMILBAU16TwDSUSW0";
 
@@ -19,7 +19,7 @@ if (location.pathname === '/contact') {
             btn_val.prop("disabled", true);
             btn_val.html("<i class='fa fa-circle-o-notch fa-spin'></i>")
 
-            $.post(form.attr("action"), form.serialize() + "&token=" + token)
+            $.post('src/Form.php', form.serialize() + "&token=" + token)
 
                 .done(function (response) {
                     response = JSON.parse(response);
@@ -82,3 +82,4 @@ if (location.pathname === '/contact') {
         });
     }
 }
+*/

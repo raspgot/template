@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?=$meta_title?></title>
-    <meta name="description" content="<?=$meta_desc?>">
+    <title><?=$meta_title ?? ''?></title>
+    <meta name="description" content="<?=$meta_desc?? ''?>">
     <!--<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>

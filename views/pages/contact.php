@@ -4,11 +4,6 @@
     $canonical  = 'contact';
     
     dump($res);
-
-    /*if(isset($_POST)) {
-        $resForm = new Form();
-        dump($resForm);
-    }*/
 ?>
 
 <div class="jumbotron mt-4">
@@ -26,7 +21,7 @@
         </ul>
     </div>
     <div class="col-md-8">
-        <form action="">
+        <form action="?submitted" method="post">
             <!-- Statut -->
             <div class="alert p-0" id="status" role="alert"></div>
             <!-- Form -->
