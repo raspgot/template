@@ -1,4 +1,11 @@
 $(function () {
+    'use strict'
+
+    $('[data-toggle="offcanvas"]').on('click', function () {
+        console.log('click');
+        $('.offcanvas-collapse').toggleClass('open')
+    })
+
     $('nav .collapse ul li a[href="' + location.pathname + '"]').parent().addClass('active');
 });
 

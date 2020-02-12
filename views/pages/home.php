@@ -4,7 +4,7 @@
     $canonical  = '';
 ?>
 
-<div class="jumbotron mt-4">
+<div class="jumbotron">
     <h1 class="display-4">Accueil</h1>
     <p class="lead"><?= $res['jumbotron_head'] ?></p>
     <hr class="my-4">

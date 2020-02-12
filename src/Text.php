@@ -36,9 +36,12 @@
         {
             $pdo = Connection::getPDO();
             try {
-                $data = $pdo
-                    ->query("SELECT title, content FROM contents")
-                    ->fetchAll();
+                $data = array();
+                $sth = $pdo->query("SELECT link, title, content FROM contents");  
+                while ($row = $sth->fetch()) {
+                    $data[$row['link']][] = [$row['title'] => $row['content']];
+                }
+
                 $pdo = null;
                 return $data;
             }

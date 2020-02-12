@@ -14,7 +14,7 @@
         public static function getPDO(): PDO 
         {
             try {
-                return new PDO('mysql:dbname=cms;host=127.0.0.1', 'root', '');
+                return new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             } catch (PDOException $e) {
                 throw new Exception("Erreur: " . $e->getMessage());
                 die();

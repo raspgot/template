@@ -13,14 +13,15 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand mb-0 h1" href="/"><?= SITE_NAME ?></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg fixed-top 
+        <?php if (REQUEST_URI === "/admin") echo 'navbar-dark bg-dark'; else echo'navbar-light bg-light'; ?>">
+        <a class="navbar-brand mr-auto mr-lg-0" href="/"><?= SITE_NAME ?></a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+
+        <div class="navbar-collapse offcanvas-collapse">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Accueil</a>
                 </li>
@@ -34,13 +35,16 @@
         </div>
     </nav>
 
-    <div class="container mb-4">
+    <main class="container mb-4">
         <?=$pageContent?>
-    </div>
+    </main>
 
     <footer class="bg-light">
         <div class="container">
             <a href="/admin">Administration</a>
+            <?php if (ENV === 'dev') { ?>
+                - <?= round(1000 * (microtime(true) - DEBUG_TIME)) ?> ms
+            <?php } ?>
         </div>
     </footer>
 
