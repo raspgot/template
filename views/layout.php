@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg fixed-top 
-        <?php if (REQUEST_URI === "/admin") echo 'navbar-dark bg-dark'; else echo'navbar-light bg-light'; ?>">
+        <?= (REQUEST_URI === "/admin" ? 'navbar-dark bg-dark' : 'navbar-light bg-light'); ?>">
         <a class="navbar-brand mr-auto mr-lg-0" href="/"><?= SITE_NAME ?></a>
         <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>

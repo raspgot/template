@@ -32,7 +32,8 @@
             ',
         ];
     
-        public function __construct($posts) {
+        public function __construct($posts)
+        {
             $this->post = $posts;
 
             # Check if request is Ajax request
