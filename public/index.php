@@ -36,7 +36,7 @@
     });
 
     Router::add('/admin', function() {
-        $res = Text::getAll();
+        $res = new Text();
         require VIEWS_PATH . 'pages/admin.php';
     });
 

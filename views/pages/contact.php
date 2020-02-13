@@ -6,7 +6,7 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Contact</h1>
-    <p class="lead"><?= $res['jumbotron_head'] ?></p>
+    <p class="lead"><?= $res['jumbotron'] ?></p>
 </div>
 
 <div class="row">

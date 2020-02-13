@@ -32,18 +32,16 @@
         /**
          * Returns all the name and the content's <div>
          */
-        public static function getAll(): array
+        public static function getAll(string $link): array
         {
             $pdo = Connection::getPDO();
             try {
-                $data = array();
-                $sth = $pdo->query("SELECT link, title, content FROM contents");  
-                while ($row = $sth->fetch()) {
-                    $data[$row['link']][] = [$row['title'] => $row['content']];
-                }
+                $sth = $pdo
+                    ->query("SELECT title, content FROM contents WHERE link = '{$link}'")
+                    ->fetchAll(PDO::FETCH_KEY_PAIR);
 
                 $pdo = null;
-                return $data;
+                return $sth;
             }
             catch (PDOException $e) {
                 print $e->getMessage();

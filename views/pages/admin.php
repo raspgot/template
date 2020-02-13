@@ -3,24 +3,6 @@
     $meta_desc  = 'Administration du site';
     $canonical  = 'administration';
 ?>
-<!--
-<div class="nav-scroller bg-white shadow-sm pt-nav">
-    <nav class="nav nav-underline">
-        <a class="nav-link active" href="/admin">
-            Accueil
-            <span class="badge badge-pill bg-light align-text-bottom">17</span>
-        </a>
-        <a class="nav-link" href="/admin/photos">
-            Photos
-            <span class="badge badge-pill bg-light align-text-bottom">21</span>
-        </a>
-        <a class="nav-link" href="/admin/contact">
-            Contact
-            <span class="badge badge-pill bg-light align-text-bottom">6</span>
-        </a>
-    </nav>
-</div>
--->
 
 <ul class="nav nav-tabs mb-3 pt-nav" id="pills-tab" role="tablist">
     <li class="nav-item">
@@ -44,7 +26,37 @@
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Accueil <?php dump($res['/']); ?></div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Photos <?php dump($res['/photos']); ?></div>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Contact <?php dump($res['/contact']); ?></div>
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <form>
+            <?php foreach ($res->getAll('/') as $name => $content) { ?>
+                <div class="form-group">
+                    <label for="<?= $name ?>"><?= $name ?></label>
+                    <textarea class="form-control" id="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
+                </div>
+            <?php } ?>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <form>
+            <?php foreach ($res->getAll('/photos') as $name => $content) { ?>
+                <div class="form-group">
+                    <label for="<?= $name ?>"><?= $name ?></label>
+                    <textarea class="form-control" id="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
+                </div>
+            <?php } ?>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <form>
+            <?php foreach ($res->getAll('/contact') as $name => $content) { ?>
+                <div class="form-group">
+                    <label for="<?= $name ?>"><?= $name ?></label>
+                    <textarea class="form-control" id="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
+                </div>
+            <?php } ?>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </div>
