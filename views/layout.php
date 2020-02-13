@@ -7,9 +7,10 @@
     <title><?=$meta_title ?? ''?></title>
     <meta name="description" content="<?=$meta_desc?? ''?>">
     <!--<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
 </head>
 
 <body>
@@ -51,6 +52,7 @@
     <script src="assets/js//jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/jquery.fancybox.min.js"></script>
 
 </body>
 
