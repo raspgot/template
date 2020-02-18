@@ -1,5 +1,4 @@
 <?php
-
     date_default_timezone_set("Europe/Paris");
     
     define("SITE_NAME", "Peintre");

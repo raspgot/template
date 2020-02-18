@@ -25,7 +25,7 @@
         require VIEWS_PATH . 'pages/contact.php';
     });
 
-    // Post route example
+    # $_POST contact form
     Router::add('/contact-form', function() {
         new Form($_POST);
     }, 'post');
@@ -40,12 +40,19 @@
         require VIEWS_PATH . 'pages/admin.php';
     });
 
-    Router::pathNotFound(function($path) {
+    # $_POST cms form
+    Router::add('/cms-form', function() {
+        foreach ($_POST as $title => $content) {
+            Text::updateByLink($title);
+        }
+    }, 'post');
+
+    Router::pathNotFound(function() {
         require VIEWS_PATH . '404.php';
         http_response_code(404);
     });
     
-    Router::methodNotAllowed(function($path, $method) {
+    Router::methodNotAllowed(function() {
         require VIEWS_PATH . '405.php';
         http_response_code(405);
     });

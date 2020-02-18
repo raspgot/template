@@ -2,6 +2,8 @@
     $meta_title = 'Administration | ' . SITE_NAME;
     $meta_desc  = 'Administration du site';
     $canonical  = 'administration';
+
+    // dd($res->getByLink('/'));
 ?>
 
 <ul class="nav nav-tabs mb-3 pt-nav" id="pills-tab" role="tablist">
@@ -27,36 +29,36 @@
 
 <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-        <form>
-            <?php foreach ($res->getAll('/') as $name => $content) { ?>
+        <form action="cms-form" method="post">
+            <?php foreach ($res->getByLink('/') as $name => $content) { ?>
                 <div class="form-group">
                     <label for="<?= $name ?>"><?= $name ?></label>
-                    <textarea class="form-control" id="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
+                    <textarea class="form-control" id="<?= $name ?>" name="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
                 </div>
             <?php } ?>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="submit-btn" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-        <form>
-            <?php foreach ($res->getAll('/photos') as $name => $content) { ?>
+        <form action="cms-form" method="post">
+            <?php foreach ($res->getByLink('/photos') as $name => $content) { ?>
                 <div class="form-group">
                     <label for="<?= $name ?>"><?= $name ?></label>
-                    <textarea class="form-control" id="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
+                    <textarea class="form-control" id="<?= $name ?>" name="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
                 </div>
             <?php } ?>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="submit-btn" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <form>
-            <?php foreach ($res->getAll('/contact') as $name => $content) { ?>
+        <form action="cms-form" method="post">
+            <?php foreach ($res->getByLink('/contact') as $name => $content) { ?>
                 <div class="form-group">
                     <label for="<?= $name ?>"><?= $name ?></label>
-                    <textarea class="form-control" id="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
+                    <textarea class="form-control" id="<?= $name ?>" name="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
                 </div>
             <?php } ?>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="submit-btn" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
 </div>

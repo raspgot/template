@@ -5,7 +5,7 @@
     use PDOException;
 
     class Text {
-        
+
         /**
          * Returns the name and the content's <div>
          * 
@@ -18,32 +18,29 @@
                 $sth = $pdo->prepare("SELECT title, content FROM contents WHERE link = :link");
                 $sth->bindValue(":link", $link, PDO::PARAM_STR);
                 $sth->execute();
-                while ($row = $sth->fetch()) {
-                    $data[$row['title']] = $row['content'];
-                }
+                $data = $sth->fetchAll(PDO::FETCH_KEY_PAIR);
                 $pdo = null;
                 return $data;
-            }
-            catch (PDOException $e) {
+            } catch (PDOException $e) {
                 print $e->getMessage();
             }
         }
         
         /**
-         * Returns all the name and the content's <div>
-         */
-        public static function getAll(string $link): array
-        {
-            $pdo = Connection::getPDO();
-            try {
-                $sth = $pdo
-                    ->query("SELECT title, content FROM contents WHERE link = '{$link}'")
-                    ->fetchAll(PDO::FETCH_KEY_PAIR);
+         * Updates content
+         * 
+         * @param string The content's title
+        */
 
+        public function updateByLink(string $title)
+        {
+            try {
+                $pdo = Connection::getPDO();
+                $sth = $pdo->prepare("UPDATE contents SET publishedDate = NOW(), content = :content WHERE title = :title");
+                $sth->bindValue(":title", $title, PDO::PARAM_STR);
+                $sth->execute();
                 $pdo = null;
-                return $sth;
-            }
-            catch (PDOException $e) {
+            } catch (PDOException $e) {
                 print $e->getMessage();
             }
         }
