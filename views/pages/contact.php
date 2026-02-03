@@ -32,11 +32,13 @@
                 <textarea name="message" class="form-control" rows="6" placeholder="Your message" aria-required="true"
                     required></textarea>
             </div>
-            <button type="submit" id="submit-btn" class="btn btn-primary btn-lg w-100">SEND</span></button>
+            <button type="submit" id="submit-btn" class="btn btn-primary btn-lg w-100">SEND</button>
             <!-- Token value | recaptcha -->
-            <input name="recaptcha-token" type="hidden">
+            <input name="token" type="hidden">
         </form>
     </div>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?render=6Lcll9UUAAAAAMu_zAeRu-rKMILBAU16TwDSUSW0"></script>
+<?php if (RECAPTCHA_SITE_KEY): ?>
+<script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars(RECAPTCHA_SITE_KEY) ?>"></script>
+<?php endif; ?>

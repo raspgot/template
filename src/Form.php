@@ -7,14 +7,6 @@
 
     class Form {
 
-        const HOST        = 'mail.infomaniak.com';
-        const USERNAME    = 'contact@raspgot.fr';
-        const PASSWORD    = '';
-        const SMTP_SECURE = PHPMailer::ENCRYPTION_STARTTLS;
-        const SMTP_AUTH   = true;
-        const PORT        = 587;
-        const SECRET_KEY  = '';
-        const SUBJECT     = 'New message !';
         public $post;
         public $handler   = [
             'success'         => 'Your message has been sent 🙂',
@@ -42,9 +34,9 @@
             }
 
             # Get secure post data
-            $name    = filter_var($this->secure($this->post['name']), FILTER_SANITIZE_STRING);
-            $email   = filter_var($this->secure($this->post['email']), FILTER_SANITIZE_EMAIL);
-            $message = filter_var($this->secure($this->post['message']), FILTER_SANITIZE_STRING);
+            $name    = $this->secure($this->post['name'] ?? '');
+            $email   = filter_var($this->secure($this->post['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+            $message = $this->secure($this->post['message'] ?? '');
 
             # Check if fields has been entered and valid
             if (!$name) $this->statusHandler('enter_name', 'error');
@@ -54,17 +46,17 @@
             # Prepare body
             $body = $this->getString('body');
             $body = $this->template( $body, [
-                'subject' => self::SUBJECT,
+                'subject' => MAIL_SUBJECT,
                 'name'    => $name,
                 'email'   => $email,
                 'message' => $message,
             ] );
 
             # Verifying the user's response
-            $recaptcha = new \ReCaptcha\ReCaptcha(self::SECRET_KEY);
+            $recaptcha = new \ReCaptcha\ReCaptcha(RECAPTCHA_SECRET_KEY);
             $resp = $recaptcha
                 ->setExpectedHostname($_SERVER['SERVER_NAME'])
-                ->verify($this->post['token'], $_SERVER['REMOTE_ADDR']);
+                ->verify($this->post['token'] ?? '', $_SERVER['REMOTE_ADDR']);
 
             if ($resp->isSuccess()) {
 
@@ -72,27 +64,27 @@
 
                 try {
                     # Server settings
-                    $mail->SMTPDebug  = SMTP::DEBUG_OFF;   # Enable verbose debug output
-                    $mail->isSMTP();                       # Set mailer to use SMTP
-                    $mail->Host       = self::HOST;        # Specify main and backup SMTP servers
-                    $mail->SMTPAuth   = self::SMTP_AUTH;   # Enable SMTP authentication
-                    $mail->Username   = self::USERNAME;    # SMTP username
-                    $mail->Password   = self::PASSWORD;    # SMTP password
-                    $mail->SMTPSecure = self::SMTP_SECURE; # Enable TLS encryption, `ssl` also accepted
-                    $mail->Port       = self::PORT;        # TCP port
+                    $mail->SMTPDebug  = SMTP::DEBUG_OFF;     # Enable verbose debug output
+                    $mail->isSMTP();                         # Set mailer to use SMTP
+                    $mail->Host       = SMTP_HOST;           # Specify main and backup SMTP servers
+                    $mail->SMTPAuth   = true;                # Enable SMTP authentication
+                    $mail->Username   = SMTP_USERNAME;       # SMTP username
+                    $mail->Password   = SMTP_PASSWORD;       # SMTP password
+                    $mail->SMTPSecure = SMTP_SECURE === 'tls' ? PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port       = SMTP_PORT;           # TCP port
                 
                     # Recipients
-                    $mail->setFrom(self::USERNAME, 'Raspgot');
+                    $mail->setFrom(MAIL_FROM_ADDRESS, MAIL_FROM_NAME);
                     $mail->addAddress($email, $name);
-                    $mail->AddCC(self::USERNAME, 'Dev_copy');
-                    $mail->addReplyTo(self::USERNAME, 'Information');
+                    $mail->AddCC(SMTP_USERNAME, 'Dev_copy');
+                    $mail->addReplyTo(SMTP_USERNAME, 'Information');
                 
                     # Content
                     $mail->CharSet = 'UTF-8';
                     $mail->isHTML(true);
-                    $mail->Subject = self::SUBJECT;
+                    $mail->Subject = MAIL_SUBJECT;
                     $mail->Body    = $body;
-                    $mail->AltBody = strip_tags($body);;
+                    $mail->AltBody = strip_tags($body);
                 
                     $mail->send();
                     $this->statusHandler('success', 'success');

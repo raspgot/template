@@ -43,8 +43,10 @@
     # $_POST cms form
     Router::add('/cms-form', function() {
         foreach ($_POST as $title => $content) {
-            Text::updateByLink($title);
+            Text::updateByLink($title, $content);
         }
+        http_response_code(200);
+        echo json_encode(['success' => true]);
     }, 'post');
 
     Router::pathNotFound(function() {
