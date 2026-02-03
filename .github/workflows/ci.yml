@@ -6,10 +6,16 @@ on:
   pull_request:
     branches: [ main, master ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
     
     strategy:
       fail-fast: false
@@ -49,6 +55,9 @@ jobs:
     name: Code Quality
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -81,6 +90,9 @@ jobs:
   security:
     name: Security Check
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout code
