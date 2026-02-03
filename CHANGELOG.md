@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+- **CRITICAL**: Updated symfony/var-dumper from 5.4.48 to 7.4.4 to fix unsafe deserialization vulnerability (CVE-2024-28859)
+
 ### Added
 - Environment variable configuration with `.env` file support
 - Custom `Env` class for environment variable management
