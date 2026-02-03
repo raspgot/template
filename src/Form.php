@@ -11,6 +11,7 @@
         public $handler   = [
             'success'         => 'Your message has been sent 🙂',
             'recaptcha-error' => 'Error in recaptcha response',
+            'csrf-error'      => 'Invalid security token. Please refresh and try again.',
             'error'           => 'Sorry, an error occurred while sending your message 😕',
             'enter_name'      => 'Please enter your name.',
             'enter_email'     => 'Please enter a valid email.',
@@ -31,6 +32,12 @@
             # Check if request is Ajax request
             if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 'XMLHttpRequest' !== $_SERVER['HTTP_X_REQUESTED_WITH']) {
                 $this->statusHandler('ajax_only', 'error');
+            }
+
+            # Verify CSRF token
+            $csrfToken = $this->post['csrf_token'] ?? '';
+            if (!Csrf::verifyToken($csrfToken)) {
+                $this->statusHandler('csrf-error', 'error');
             }
 
             # Get secure post data

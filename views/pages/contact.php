@@ -1,4 +1,6 @@
 <?php 
+    use App\Csrf;
+    
     $meta_title = 'Contact | ' . SITE_NAME;
     $meta_desc  = 'Notre page de contact';
     $canonical  = 'contact';
@@ -33,6 +35,8 @@
                     required></textarea>
             </div>
             <button type="submit" id="submit-btn" class="btn btn-primary btn-lg w-100">SEND</button>
+            <!-- CSRF Token -->
+            <input name="csrf_token" type="hidden" value="<?= htmlspecialchars(Csrf::getToken()) ?>">
             <!-- Token value | recaptcha -->
             <input name="token" type="hidden">
         </form>
