@@ -1,4 +1,6 @@
 <?php 
+    use App\Csrf;
+    
     $meta_title = 'Administration | ' . SITE_NAME;
     $meta_desc  = 'Administration du site';
     $canonical  = 'administration';
@@ -36,6 +38,7 @@
                     <textarea class="form-control" id="<?= $name ?>" name="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
                 </div>
             <?php } ?>
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(Csrf::getToken()) ?>">
             <button type="submit" id="submit-btn" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
@@ -47,6 +50,7 @@
                     <textarea class="form-control" id="<?= $name ?>" name="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
                 </div>
             <?php } ?>
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(Csrf::getToken()) ?>">
             <button type="submit" id="submit-btn" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
@@ -58,6 +62,7 @@
                     <textarea class="form-control" id="<?= $name ?>" name="<?= $name ?>" rows="4"><?= htmlspecialchars($content) ?></textarea>
                 </div>
             <?php } ?>
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(Csrf::getToken()) ?>">
             <button type="submit" id="submit-btn" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>

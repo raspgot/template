@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<ruleset name="Template Coding Standard">
+    <description>PSR-12 Coding Standard for Template Project</description>
+
+    <!-- Show progress -->
+    <arg value="p"/>
+    
+    <!-- Show colors in output -->
+    <arg name="colors"/>
+    
+    <!-- Directories to scan -->
+    <file>src</file>
+    <file>public</file>
+    
+    <!-- Exclude patterns -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/views/*</exclude-pattern>
+    
+    <!-- Use PSR-12 coding standard -->
+    <rule ref="PSR12"/>
+    
+    <!-- Additional rules -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
+    </rule>
+    
+    <!-- Check for proper type declarations -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
+</ruleset>
