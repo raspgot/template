@@ -42,6 +42,17 @@
 
     # $_POST cms form
     Router::add('/cms-form', function() {
+        // Verify CSRF token
+        $csrfToken = $_POST['csrf_token'] ?? '';
+        if (!App\Csrf::verifyToken($csrfToken)) {
+            http_response_code(403);
+            echo json_encode(['success' => false, 'error' => 'Invalid CSRF token']);
+            return;
+        }
+        
+        // Remove CSRF token from POST data before processing
+        unset($_POST['csrf_token']);
+        
         foreach ($_POST as $title => $content) {
             Text::updateByLink($title, $content);
         }

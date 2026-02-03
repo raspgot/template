@@ -1,6 +1,11 @@
 <?php
     use App\Env;
 
+    // Start session for CSRF protection
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
     // Load environment variables
     $envFile = __DIR__ . '/.env';
     if (file_exists($envFile)) {
